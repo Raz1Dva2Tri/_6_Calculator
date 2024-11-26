@@ -36,7 +36,7 @@ namespace Calculator.Controllers
         /// <param name="operation">Тип операции (сложение, вычитание, умножение, деление).</param>
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> ProcessingCalculationRequest(double num1, double num2, Operation operation)
+        public async Task<IActionResult> Calculate(double num1, double num2, Operation operation)
         {
             // Подготовка объекта для расчета
             var dataInputVariant = new DataInputVariant

@@ -1,7 +1,6 @@
 ﻿using Confluent.Kafka;
 using Microsoft.Extensions.Configuration;
 using System;
-using System.Reflection.Metadata;
 
 namespace Calculator.Services
 {
@@ -17,7 +16,7 @@ namespace Calculator.Services
             kafkaProducer = new ProducerBuilder<byte[], byte[]>(conf).Build();
         }
 
-        public Confluent.Kafka.Handle Handle { get => kafkaProducer.Handle; }
+        public Handle Handle { get => kafkaProducer.Handle; }
 
         public void Dispose()
         {
