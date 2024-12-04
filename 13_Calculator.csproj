@@ -4,7 +4,7 @@
     <TargetFramework>net6.0</TargetFramework>
     <Nullable>enable</Nullable>
     <ImplicitUsings>enable</ImplicitUsings>
-    <RootNamespace>_13_Calculator</RootNamespace>
+    <RootNamespace>13_Calculator</RootNamespace>
   </PropertyGroup>
 
 </Project>
