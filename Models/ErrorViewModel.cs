@@ -1,4 +1,4 @@
-namespace 13_Calculator.Models
+namespace Calculator.Models
 {
     public class ErrorViewModel
     {
