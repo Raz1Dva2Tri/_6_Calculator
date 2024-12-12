@@ -1,5 +1,4 @@
 ﻿using Confluent.Kafka;
-using Calculator.Models;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Hosting;
 using System;
@@ -20,6 +19,7 @@ namespace Calculator.Services
     using Microsoft.Extensions.DependencyInjection;
     using Microsoft.Extensions.Hosting;
     using System.Net.Http;
+    using Calculator;
 
     public class KafkaConsumerService : BackgroundService
     {

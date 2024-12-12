@@ -17,7 +17,14 @@
     <input type="submit" value="Calculate" />
 </form>
 
-@if (ViewBag.Result != null)
-{
-    <h3>Result: @ViewBag.Result</h3>
-}
+<ul>
+    @if (ViewBag.Result != null)
+    {
+        @foreach(var rec in ViewBag.Data)
+        {
+            <li>
+                <p>(@rec.ID_DataInputVariant) @rec.Operand_1 @rec.Type_operation @rec.Operand_2 = @rec.Result</p>
+            </li>
+        }
+    }
+</ul>

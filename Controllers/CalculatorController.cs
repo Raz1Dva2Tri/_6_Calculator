@@ -2,13 +2,16 @@
 using Calculator.Models;
 using Calculator.Services;
 using Confluent.Kafka;
+using Microsoft.AspNetCore.Components.Forms;
 using Microsoft.AspNetCore.Mvc;
+using System.Net;
 using System.Text.Json;
 
 namespace Calculator.Controllers
 {
     public class CalculatorController : Controller
     {
+        // может убрать readonly?
         private readonly CalculatorContext _context;
         private readonly KafkaProducerService<Null, string> _producer;
 
@@ -24,7 +27,7 @@ namespace Calculator.Controllers
         public IActionResult Index()
         {
             var data = _context.DataInputVariants.OrderByDescending(x => x.ID_DataInputVariant).ToList();
-
+            //ViewBag.Data = data;
             return View(data);
         }
 
@@ -46,6 +49,25 @@ namespace Calculator.Controllers
                 Type_operation = operation,
             };
 
+            // Получение результата в зависимости от операции
+            switch (operation)
+            {
+                case Operation.Add:
+                    dataInputVariant.Result = (num1 + num2).ToString();
+                    break;
+                case Operation.Subtract:
+                    dataInputVariant.Result = (num1 - num2).ToString();
+                    break;
+                case Operation.Multiply:
+                    dataInputVariant.Result = (num1 * num2).ToString();
+                    break;
+                case Operation.Divide:
+                    dataInputVariant.Result = (num1 / num2).ToString();
+                    break;
+            }
+
+            SaveDataAndResult(dataInputVariant);
+
             // Отправка данных в Kafka
             await SendDataToKafka(dataInputVariant);
 
@@ -53,13 +75,13 @@ namespace Calculator.Controllers
             return RedirectToAction(nameof(Index));
         }
 
-        public IActionResult Callback([FromBody] DataInputVariant inputData)
-        {
-            // Сохранение данных и результата в базе данных
-            SaveDataAndResult(inputData);
+        //public IActionResult Callback([FromBody] DataInputVariant inputData)
+        //{
+        //    // Сохранение данных и результата в базе данных
+        //    SaveDataAndResult(inputData);
 
-            return Ok();
-        }
+        //    return Ok();
+        //}
 
         /// <summary>
         /// Сохранение данных и результата в базе данных.
@@ -85,7 +107,7 @@ namespace Calculator.Controllers
         private async Task SendDataToKafka(DataInputVariant dataInputVariant)
         {
             var json = JsonSerializer.Serialize(dataInputVariant);
-            await _producer.ProduceAsync("lavrov", new Message<Null, string> { Value = json });
+            await _producer.ProduceAsync("Novoselov", new Message<Null, string> { Value = json });
         }
     }
 }

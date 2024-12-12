@@ -1,6 +1,6 @@
 ﻿using Calculator.Controllers;
 
-namespace Calculator.Models
+namespace Calculator
 {
     public class CalculatorLibrary
     {

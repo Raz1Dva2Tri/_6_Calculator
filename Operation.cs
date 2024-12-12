@@ -1,6 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations;
 
-namespace Calculator.Models
+namespace Calculator
 {
     public enum Operation
     {
