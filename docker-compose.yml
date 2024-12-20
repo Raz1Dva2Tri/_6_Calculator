@@ -2,7 +2,7 @@ version: '3.7'
 
 services:     
   web:
-    container_name: web-app-calculator-jenkins_13
+    container_name: web-app-calculator-jenkins
     hostname: app
     build: ./
     ports:
