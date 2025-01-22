@@ -17,5 +17,5 @@ services:
     networks:
       - monitoring-net
 networks:
-  monitoring-net:
-    driver: bridge
+  13_calculator_default:
+    external: true
