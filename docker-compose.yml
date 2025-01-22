@@ -1,18 +1,18 @@
 version: '3.7'
 
 services:
-    web:
-        container_name: 13_web-app-calculator
-        hostname: app
-        build: ./
-        ports:
-            - "0.0.0.0:5013:5013"
-    
-    prometheus:
-        image: prom/prometheus:latest
-        volumes:
-            - ./prometheus.yml:/etc/prometheus/prometheus.yml  # Конфигурационный файл.
-        ports:
-            - 9090:9090  # Порт для доступа к интерфейсу Prometheus.
-        networks:
-            - monitoring-net
+  web:
+    container_name: web-app-calculator_13
+    hostname: app
+    build: ./
+    ports:
+      - "0.0.0.0:5113:5013"       
+
+  prometheus:
+    image: prom/prometheus:latest
+    volumes:
+      - /var/app/metrics/prometheus/config/prometheus.yml:/etc/prometheus/prometheus.yml  # Конфигурационный файл.
+    ports:
+      - 9090:9090  # Порт для доступа к интерфейсу Prometheus.
+    networks:
+      - monitoring-net
