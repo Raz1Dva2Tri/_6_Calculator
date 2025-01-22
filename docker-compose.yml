@@ -16,3 +16,6 @@ services:
       - 9090:9090  # Порт для доступа к интерфейсу Prometheus.
     networks:
       - monitoring-net
+networks:
+  monitoring-net:
+    driver: bridge
