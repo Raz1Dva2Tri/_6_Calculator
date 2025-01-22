@@ -32,6 +32,8 @@ builder.Services.AddOpenTelemetry()
 
 var app = builder.Build();
 
+app.MapPrometheusScrapingEndpoint();
+
 // Configure the HTTP request pipeline.
 if (!app.Environment.IsDevelopment())
 {
@@ -50,7 +52,5 @@ app.UseAuthorization();
 app.MapControllerRoute(
     name: "default",
     pattern: "{controller=Calculator}/{action=Index}/{id?}");
-
-app.MapPrometheusScrapingEndpoint();
 
 app.Run();
