@@ -1,21 +1,32 @@
-version: '3.7'
-
-services:     
+services:
   mariadb:
     container_name: web-mariadb_06
-    hostname: mariadb
     image: mariadb:10.5
-    restart: always
     environment:
       MARIADB_ROOT_PASSWORD: qwerty
       MARIADB_DATABASE: webdb
       MARIADB_USER: webdb
       MARIADB_PASSWORD: qwerty
     ports:
-      - "0.0.0.0:5066:3306"      
+      - "5066:3306"
+    volumes:
+      - mariadb_data:/var/lib/mysql
+    healthcheck:
+      test: ["CMD", "mysqladmin", "ping", "-h", "localhost", "-uwebdb", "-pqwerty"]
+      interval: 5s
+      timeout: 5s
+      retries: 5
+
   web:
     container_name: web-app-calculator_06
-    hostname: app
-    build: ./
+    build: .
     ports:
-      - "0.0.0.0:5006:5006"
+      - "5006:5006"
+    depends_on:
+      mariadb:
+        condition: service_healthy
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Development
+
+volumes:
+  mariadb_data:
