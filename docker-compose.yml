@@ -3,7 +3,7 @@ version: '3.7'
 services:
   mariadb:
     image: mariadb:10.5
-    container_name: web-mariadb
+    container_name: web-mariadb_06
     environment:
       MARIADB_ROOT_PASSWORD: qwerty
       MARIADB_DATABASE: webdb
