@@ -10,7 +10,7 @@ services:
       MARIADB_ROOT_PASSWORD: qwerty
       MARIADB_DATABASE: webdb
       MARIADB_USER: webdb
-      MARIADB_PASSWORD: password
+      MARIADB_PASSWORD: qwerty
     ports:
       - "0.0.0.0:5066:3306"      
   web:
